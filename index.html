@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -210,137 +209,118 @@ writing-mode:horizontal-tb;
 </head>
 <body>
   <div id="aplicacion">
-       <div>
-        <h1>Notas rápidas</h1> 
-        <input placeholder="Buscar..." v-model="buscarTarea" id="search" type="search">
-      </div> 
-    <div id="listado-tareas">
-    
-  <ul>
-    <li
-      is="tarea-item"
-      v-for="(tarea, index) in filtrarTareas"
-      v-if="tarea.estado=='Pendiente'"
-      v-bind:key="tarea.id"
-      v-bind:id="tarea.id"
-      v-bind:titulo="tarea.titulo"
-      v-bind:estado="tarea.estado"
-      v-on:estadoterminada="tarea.estado='Terminada'"
-      v-on:estadopendiente="tarea.estado='Pendiente'"
-      v-on:edit="edit(tarea.id,index)"
-      v-on:remove="remove(index)"
-    ></li>
-  </ul>
-<h1>Terminadas</h1>
-<ul>
-    <li
-      is="tarea-item"
-      v-for="(tarea, index) in filtrarTareas"
-      v-if="tarea.estado=='Terminada'"
-      v-bind:key="tarea.id"
-      v-bind:id="tarea.id"
-      v-bind:titulo="tarea.titulo"
-      v-bind:estado="tarea.estado"
-      v-on:estadoterminada="tarea.estado='Terminada'"
-      v-on:estadopendiente="tarea.estado='Pendiente'"
-      v-on:edit="edit(tarea.id,index)"
-      v-on:remove="remove(index)"
-    ></li>
-  </ul>
-  <button class="stylebutton"  v-on:click="agregarTarea">+</button>
-</div>
+    <div>
+      <h1>Notas rápidas</h1> 
+      <input placeholder="Buscar..." id="search" type="search">
+    </div> 
+    <div id="listado-tareas"></div>
+    <button class="stylebutton">+</button>
   </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-ls/3.2.1/vue-ls.min.js"></script>
 
   <script>
-    Vue.component('tarea-item', {
-  template: `\
-    <li :id="id">\
-      <a href="#">\
-            <span \
-              class="xbutton"
-              title="Eliminar" v-on:click="$emit('remove')">x</span>\
-            <span class="tbutton" title="Marcar como Terminada" v-if="estado=='Pendiente'" v-on:click="$emit('estadoterminada')">✓</span>\
-            <span class="tbutton" title="Marcar como Pendiente" v-if="estado=='Terminada'" v-on:click="$emit('estadopendiente')">✓</span>\
-             <p contenteditable="true" :id="'item'+id" :item="id" @blur="$emit('edit')" >{{ titulo }}</p>\
-      </a>\
-    </li>\
-  `,     
-  props: ['id', 'titulo', 'estado']
-})
-new Vue({
-  el: '#aplicacion',
-  data: {
-    nuevaTareaTexto: '',
-    tareas: [
-    ],
-    sigTareaId: 1,
-    buscarTarea: '',
-    verTareas: 'Pendiente'
-  },
-  computed: {
-   filtrarTareas() {
-    const search = this.buscarTarea.toLowerCase().trim();
-    if (!search) return this.tareas;
-     return this.tareas.filter(c => c.titulo.toLowerCase().indexOf(search) > -1);
-    }
-   },
-   updated() {
-     //this.persist();
-    // console.log(this.tareas);
-   },
-   mounted() {
-    if (localStorage.getItem('tareas')) {
-      try {
-         this.tareas = JSON.parse(localStorage.getItem('tareas'));
-         //console.log("loaded");
-      } catch(e) {
-        localStorage.removeItem('tareas');
-         //console.log("empty");
+    document.addEventListener("DOMContentLoaded", () => {
+      const tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+      let sigTareaId = JSON.parse(localStorage.getItem("sigTareaId")) || 1;
+
+      const searchInput = document.getElementById("search");
+      const listadoTareas = document.getElementById("listado-tareas");
+      const botonAgregar = document.querySelector(".stylebutton");
+
+      function guardar() {
+        localStorage.setItem("tareas", JSON.stringify(tareas));
+        localStorage.setItem("sigTareaId", JSON.stringify(sigTareaId));
       }
-    }
-    if (localStorage.getItem('sigTareaId')) {
-      try {
-         this.sigTareaId = JSON.parse(localStorage.getItem('sigTareaId'));
-         //console.log("loaded");
-      } catch(e) {
-        localStorage.removeItem('sigTareaId');
-         //console.log("empty");
+
+      function crearElementoTarea(tarea, index) {
+        const li = document.createElement("li");
+        li.id = tarea.id;
+
+        const a = document.createElement("a");
+        a.href = "#";
+
+        const btnEliminar = document.createElement("span");
+        btnEliminar.className = "xbutton";
+        btnEliminar.textContent = "x";
+        btnEliminar.title = "Eliminar";
+        btnEliminar.addEventListener("click", () => {
+          if (confirm("¿Estás seguro de eliminar esta nota?")) {
+            tareas.splice(index, 1);
+            guardar();
+            render();
+          }
+        });
+
+        const btnToggle = document.createElement("span");
+        btnToggle.className = "tbutton";
+        btnToggle.textContent = "✓";
+        btnToggle.title = tarea.estado === "Pendiente" ? "Marcar como Terminada" : "Marcar como Pendiente";
+        btnToggle.addEventListener("click", () => {
+          tarea.estado = tarea.estado === "Pendiente" ? "Terminada" : "Pendiente";
+          guardar();
+          render();
+        });
+
+        const p = document.createElement("p");
+        p.contentEditable = true;
+        p.textContent = tarea.titulo;
+        p.id = "item" + tarea.id;
+        p.setAttribute("item", tarea.id);
+        p.addEventListener("blur", () => {
+          tareas[index].titulo = p.innerText;
+          guardar();
+        });
+
+        a.appendChild(btnEliminar);
+        a.appendChild(btnToggle);
+        a.appendChild(p);
+        li.appendChild(a);
+
+        return li;
       }
-    } 
-   },
-  methods: {
-    agregarTarea: function () {
-      this.tareas.push({
-        id: this.sigTareaId++,
-        titulo: this.nuevaTareaTexto,
-        estado: 'Pendiente',
-      })
-      this.nuevaTareaTexto = '';
-      
-      //this.verTareas = 'Pendiente';
-      this.persist();
-    },
-    edit(id,index) {
-      //console.log(index);
-      this.tareas[index].titulo = document.getElementById("item"+id).innerText;
-      this.persist();
-    },
-    remove(index) {
-      if(confirm('Esta seguro que desea eliminar esta nota?')){
-        this.tareas.splice(index, 1);
-        this.persist();
+
+      function render() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const filtradas = tareas.filter(t => t.titulo.toLowerCase().includes(searchText));
+
+        const ulPendientes = document.createElement("ul");
+        const ulTerminadas = document.createElement("ul");
+
+        filtradas.forEach((tarea, index) => {
+          const li = crearElementoTarea(tarea, index);
+          if (tarea.estado === "Pendiente") {
+            ulPendientes.appendChild(li);
+          } else {
+            ulTerminadas.appendChild(li);
+          }
+        });
+
+        listadoTareas.innerHTML = `
+          <h1>Pendientes</h1>
+          <ul id="pendientes"></ul>
+          <h1>Terminadas</h1>
+          <ul id="terminadas"></ul>
+        `;
+
+        listadoTareas.querySelector("#pendientes").replaceWith(ulPendientes);
+        listadoTareas.querySelector("#terminadas").replaceWith(ulTerminadas);
+        listadoTareas.appendChild(botonAgregar); // Volver a insertar el botón
       }
-    },
-    persist() {
-      localStorage.tareas = JSON.stringify(this.tareas);
-      localStorage.sigTareaId = JSON.stringify(this.sigTareaId);
-      console.log("save");
-    }
-  }
-})
+
+      botonAgregar.addEventListener("click", () => {
+        const nuevaTarea = {
+          id: sigTareaId++,
+          titulo: "Nueva nota",
+          estado: "Pendiente"
+        };
+        tareas.push(nuevaTarea);
+        guardar();
+        render();
+      });
+
+      searchInput.addEventListener("input", render);
+
+      render();
+    });
   </script>
 </body>
 </html>
