@@ -1,0 +1,346 @@
+
+<!doctype html>
+<html>
+<head>
+  <title>Notas rápidas</title> 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+  *{
+  margin:0;
+  padding:0;
+}
+input#search{
+    width: 300px;
+    height: 35px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: right;
+    color: #000;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+ 
+   
+    -webkit-transition: background .55s ease;
+  -moz-transition: background .55s ease;
+  -ms-transition: background .55s ease;
+  -o-transition: background .55s ease;
+  transition: background .55s ease;
+}
+.xbutton:hover, .tbutton:hover{
+  color:#7c7a7a;
+}
+.xbutton{
+  display:inline !important;
+  float:left !important;
+  margin-top: -24px !important;
+  margin-left: -15px !important;
+  font-size: 2em !important;
+}
+.tbutton{
+  display:inline !important;
+  float:right !important;
+  margin-top: -24px !important;
+  margin-right: -12px !important;
+  font-size: 2em !important;
+}
+body{
+  font-family:arial,sans-serif;
+  font-size:100%;
+  margin:1em;
+  background:#666;
+  color:#fff;
+}
+h2,p{
+  font-size:100%;
+  font-weight:normal;
+}
+ul,li{
+  list-style:none;
+}
+ul{
+  overflow:hidden;
+  padding:3em;
+}
+ul li a{
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  height:10em;
+  width:10em;
+  padding:1em;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .15s linear;
+  -o-transition:-o-transform .15s linear;
+  -webkit-transition:-webkit-transform .15s linear;
+}
+ul li{
+  margin:1em;
+  float:left;
+}
+ul li h2{
+  font-size:140%;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+ul li p{
+  font-family:"Reenie Beanie",arial,sans-serif;
+  font-size:180%;
+}
+ul li a:not(.active){
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform:rotate(-6deg);
+}
+ul li:nth-child(even) a:not(.active){
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  background:#cfc;
+}
+ul li:nth-child(3n) a:not(.active){
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background:#ccf;
+}
+ul li:nth-child(5n) a:not(.active){
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+}
+ul li a:hover,ul li a:focus,.active{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li a{color:#fff;}
+.stylebutton{
+align-items:flex-start;
+background-color:rgb(0, 123, 255);
+border-bottom-color:rgb(0, 123, 255);
+border-bottom-left-radius:160px;
+border-bottom-right-radius:160px;
+border-bottom-style:solid;
+border-bottom-width:0.998933px;
+border-image-outset:0;
+border-image-repeat:stretch;
+border-image-slice:100%;
+border-image-source:none;
+border-image-width:1;
+border-left-color:rgb(0, 123, 255);
+border-left-style:solid;
+border-left-width:0.998933px;
+border-right-color:rgb(0, 123, 255);
+border-right-style:solid;
+border-right-width:0.998933px;
+border-top-color:rgb(0, 123, 255);
+border-top-left-radius:160px;
+border-top-right-radius:160px;
+border-top-style:solid;
+border-top-width:0.998933px;
+bottom:10px;
+box-sizing:border-box;
+color:rgb(255, 255, 255);
+cursor:pointer;
+display:block;
+font-family:arial, sans-serif;
+font-size:24px;
+font-stretch:100%;
+font-style:normal;
+font-variant-caps:normal;
+font-variant-east-asian:normal;
+font-variant-ligatures:normal;
+font-variant-numeric:normal;
+font-weight:700;
+height:49.9935px;
+letter-spacing:normal;
+line-height:36px;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+overflow-x:visible;
+overflow-y:visible;
+padding-bottom:6px;
+padding-left:14.4px;
+padding-right:14.4px;
+padding-top:6px;
+position:fixed;
+right:10px;
+text-align:center;
+text-indent:0px;
+text-rendering:auto;
+text-shadow:none;
+text-size-adjust:100%;
+text-transform:none;
+transition-delay:0s, 0s, 0s, 0s;
+transition-duration:0.15s, 0.15s, 0.15s, 0.15s;
+transition-property:color, background-color, border-color, box-shadow;
+transition-timing-function:ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+user-select:none;
+vertical-align:middle;
+width:49.9935px;
+word-spacing:0px;
+writing-mode:horizontal-tb;
+-webkit-appearance:none;
+-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+-webkit-border-image:none;
+    }
+  </style>
+</head>
+<body>
+  <div id="aplicacion">
+       <div>
+        <h1>Notas rápidas</h1> 
+        <input placeholder="Buscar..." v-model="buscarTarea" id="search" type="search">
+      </div> 
+    <div id="listado-tareas">
+    
+  <ul>
+    <li
+      is="tarea-item"
+      v-for="(tarea, index) in filtrarTareas"
+      v-if="tarea.estado=='Pendiente'"
+      v-bind:key="tarea.id"
+      v-bind:id="tarea.id"
+      v-bind:titulo="tarea.titulo"
+      v-bind:estado="tarea.estado"
+      v-on:estadoterminada="tarea.estado='Terminada'"
+      v-on:estadopendiente="tarea.estado='Pendiente'"
+      v-on:edit="edit(tarea.id,index)"
+      v-on:remove="remove(index)"
+    ></li>
+  </ul>
+<h1>Terminadas</h1>
+<ul>
+    <li
+      is="tarea-item"
+      v-for="(tarea, index) in filtrarTareas"
+      v-if="tarea.estado=='Terminada'"
+      v-bind:key="tarea.id"
+      v-bind:id="tarea.id"
+      v-bind:titulo="tarea.titulo"
+      v-bind:estado="tarea.estado"
+      v-on:estadoterminada="tarea.estado='Terminada'"
+      v-on:estadopendiente="tarea.estado='Pendiente'"
+      v-on:edit="edit(tarea.id,index)"
+      v-on:remove="remove(index)"
+    ></li>
+  </ul>
+  <button class="stylebutton"  v-on:click="agregarTarea">+</button>
+</div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-ls/3.2.1/vue-ls.min.js"></script>
+
+  <script>
+    Vue.component('tarea-item', {
+  template: `\
+    <li :id="id">\
+      <a href="#">\
+            <span \
+              class="xbutton"
+              title="Eliminar" v-on:click="$emit('remove')">x</span>\
+            <span class="tbutton" title="Marcar como Terminada" v-if="estado=='Pendiente'" v-on:click="$emit('estadoterminada')">✓</span>\
+            <span class="tbutton" title="Marcar como Pendiente" v-if="estado=='Terminada'" v-on:click="$emit('estadopendiente')">✓</span>\
+             <p contenteditable="true" :id="'item'+id" :item="id" @blur="$emit('edit')" >{{ titulo }}</p>\
+      </a>\
+    </li>\
+  `,     
+  props: ['id', 'titulo', 'estado']
+})
+new Vue({
+  el: '#aplicacion',
+  data: {
+    nuevaTareaTexto: '',
+    tareas: [
+    ],
+    sigTareaId: 1,
+    buscarTarea: '',
+    verTareas: 'Pendiente'
+  },
+  computed: {
+   filtrarTareas() {
+    const search = this.buscarTarea.toLowerCase().trim();
+    if (!search) return this.tareas;
+     return this.tareas.filter(c => c.titulo.toLowerCase().indexOf(search) > -1);
+    }
+   },
+   updated() {
+     //this.persist();
+    // console.log(this.tareas);
+   },
+   mounted() {
+    if (localStorage.getItem('tareas')) {
+      try {
+         this.tareas = JSON.parse(localStorage.getItem('tareas'));
+         //console.log("loaded");
+      } catch(e) {
+        localStorage.removeItem('tareas');
+         //console.log("empty");
+      }
+    }
+    if (localStorage.getItem('sigTareaId')) {
+      try {
+         this.sigTareaId = JSON.parse(localStorage.getItem('sigTareaId'));
+         //console.log("loaded");
+      } catch(e) {
+        localStorage.removeItem('sigTareaId');
+         //console.log("empty");
+      }
+    } 
+   },
+  methods: {
+    agregarTarea: function () {
+      this.tareas.push({
+        id: this.sigTareaId++,
+        titulo: this.nuevaTareaTexto,
+        estado: 'Pendiente',
+      })
+      this.nuevaTareaTexto = '';
+      
+      //this.verTareas = 'Pendiente';
+      this.persist();
+    },
+    edit(id,index) {
+      //console.log(index);
+      this.tareas[index].titulo = document.getElementById("item"+id).innerText;
+      this.persist();
+    },
+    remove(index) {
+      if(confirm('Esta seguro que desea eliminar esta nota?')){
+        this.tareas.splice(index, 1);
+        this.persist();
+      }
+    },
+    persist() {
+      localStorage.tareas = JSON.stringify(this.tareas);
+      localStorage.sigTareaId = JSON.stringify(this.sigTareaId);
+      console.log("save");
+    }
+  }
+})
+  </script>
+</body>
+</html>
